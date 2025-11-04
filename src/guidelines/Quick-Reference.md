@@ -2,46 +2,56 @@
 
 Fast lookup reference for common development tasks and questions.
 
+> 📘 **Current Design System**: Fitness v2.0 (Nov 2025) | See [Fitness-Style-Guide.md](/guidelines/Fitness-Style-Guide.md)
+
 ---
 
-## 🎨 Colors
+## 🎨 Colors (Fitness Design v2.0)
 
 ### Primary Palette
-```
-Sage Green:  #7A9B70 (buttons, success, progress)
-Dark Sage:   #3A4A46 (ALL icons, text, borders)
-Coral:       #E66E5A (errors, incorrect, warnings)
-Cream:       #FFF8F2 (backgrounds)
+```css
+--gray-primary:     #41463d  (buttons, primary actions)
+--gray-hover:       #353930  (button hover states)
+--gray-light:       #e8e9e6  (subtle backgrounds)
+--powder-blue:      #eff6fc  (card backgrounds, headers)
+--mint-green:       #86efac  (SUCCESS ONLY - completed items)
+--text-primary:     #1a1a1a  (main text)
+--text-secondary:   #6b7280  (secondary text, icons)
 ```
 
-### Icon Colors
-**IMPORTANT**: All stat icons (XP, lives, hints, streak, level) MUST use `#3A4A46` (dark sage)
+### Usage Rules
+- **Backgrounds**: White (`bg-white`) for main areas
+- **Buttons**: Gray primary with white text
+- **Success States**: Mint green (completed lessons, correct answers)
+- **Icons**: Use `text-[var(--text-primary)]` or `text-[var(--text-secondary)]`
+- **Mint Green**: ONLY for success indicators, never for primary buttons
 
 ---
 
-## 📐 Clay-Style Standards
+## 📐 Fitness-Style Standards
 
 ### Rounded Corners
-- Buttons: `rounded-2xl` (16px)
-- Cards: `rounded-3xl` (24px)
-- Inputs: `rounded-2xl` (16px)
-- Badges: `rounded-xl` (12px)
+- Buttons: `rounded-lg` or `rounded-xl`
+- Cards: `rounded-lg` or `rounded-xl`
+- Inputs: `rounded-lg`
+- Badges: `rounded-full` or `rounded-lg`
 
-### Borders
-- All interactive: `border-2` (2px solid)
-- Color: `#3A4A46` (dark sage)
-
-### Shadows
+### Shadows (No Thick Borders)
 ```tsx
-Button: shadow-[0_3px_0_0_rgba(58,74,70,0.15)]
-Card: shadow-[0_4px_0_0_rgba(58,74,70,0.1)]
-Input: shadow-[0_2px_0_0_rgba(58,74,70,0.1)]
+Button:  shadow-md hover:shadow-lg
+Card:    shadow-sm hover:shadow-md
+Input:   shadow-sm
+Badge:   shadow-sm
 ```
 
-### Active State (all buttons)
+### Hover States (buttons)
 ```tsx
-active:shadow-none active:translate-y-[2px] transition-all
+bg-[var(--gray-primary)] hover:bg-[var(--gray-hover)] 
+text-white shadow-md hover:shadow-lg transition-all
 ```
+
+### Legacy (v1.x - Clay Design)
+See [Clay-Style-Guide.md](/guidelines/Clay-Style-Guide.md) for historical reference
 
 ---
 
@@ -64,12 +74,14 @@ Navigation:      /components/Navigation.tsx
 
 ### Documentation
 ```
-Design System:      /guidelines/Clay-Style-Guide.md
-Dev Guidelines:     /guidelines/Guidelines.md
-Features:           /guidelines/Prototype-Features.md
-Page Details:       /guidelines/Page-Documentation.md
-User Journeys:      /guidelines/User-Stories.md
-Documentation Map:  /guidelines/Documentation-Summary.md
+Design System (v2.0): /guidelines/Fitness-Style-Guide.md
+Legacy Design (v1.x): /guidelines/Clay-Style-Guide.md
+Redesign Log:         /FITNESS_REDESIGN_CHANGELOG.md
+Dev Guidelines:       /guidelines/Guidelines.md
+Features:             /guidelines/Prototype-Features.md
+Page Details:         /guidelines/Page-Documentation.md
+User Journeys:        /guidelines/User-Stories.md
+Documentation Map:    /guidelines/Documentation-Summary.md
 ```
 
 ---

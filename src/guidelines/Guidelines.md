@@ -17,7 +17,7 @@ Complete development guidelines for the ChurchAcademy platform - a comprehensive
 - Gamification (lives, hints, points, badges, leaderboards)
 - Reflection system with admin feedback
 - Comprehensive admin panel for content management
-- Clay-style UI inspired by Duolingo
+- **Modern fitness-inspired UI** with clean, professional design
 - Profile management with avatar upload
 - Course browsing and filtering
 
@@ -75,7 +75,8 @@ Complete development guidelines for the ChurchAcademy platform - a comprehensive
 ├── styles/
 │   └── globals.css                 # Typography, variables, base styles
 └── guidelines/
-    ├── Clay-Style-Guide.md         # Design system documentation
+    ├── Fitness-Style-Guide.md      # Current design system (v2.0)
+    ├── Clay-Style-Guide.md         # Legacy design system (v1.x)
     ├── Guidelines.md               # This file
     ├── Prototype-Features.md       # Feature specifications
     ├── Page-Documentation.md       # Page-by-page element breakdown
@@ -144,16 +145,32 @@ export function ComponentName({ prop1, prop2, onAction }) {
 
 ### CSS Custom Properties
 
-Defined in `globals.css`:
+Defined in `globals.css` (Fitness Design System v2.0):
 ```css
 :root {
-  --sage-green: #7A9B70;
-  --dark-sage: #3A4A46;
-  --coral: #E66E5A;
-  --cream: #FFF8F2;
-  /* etc. */
+  /* Primary Colors */
+  --gray-primary: #41463d;      /* Main gray for buttons */
+  --gray-hover: #353930;        /* Hover state */
+  --gray-light: #e8e9e6;        /* Light backgrounds */
+  
+  /* Accent Colors */
+  --powder-blue: #eff6fc;       /* Subtle backgrounds */
+  --mint-green: #86efac;        /* Success states ONLY */
+  
+  /* Text Colors */
+  --text-primary: #1a1a1a;      /* Main text */
+  --text-secondary: #6b7280;    /* Secondary text */
 }
 ```
+
+**Design Principles:**
+- White backgrounds (`bg-white`) for main areas
+- Gray buttons (`bg-[var(--gray-primary)]`) with white text
+- Shadow-based elevation (`shadow-sm`, `shadow-md`, `shadow-lg`)
+- Mint green **only** for success states (completed items, correct answers)
+- Powder blue for subtle card backgrounds
+- Clean rounded corners (`rounded-lg`, `rounded-xl`)
+- No thick borders (use `border` or `shadow-sm` instead)
 
 ### Shadcn Component Usage
 
@@ -370,10 +387,10 @@ import { motion } from 'motion/react';
 ))}
 ```
 
-### Button Press Effect
-Already built into clay-style buttons:
+### Button Hover Effects
+Fitness-style buttons use subtle shadow transitions:
 ```tsx
-className="active:shadow-none active:translate-y-[2px] transition-all"
+className="bg-[var(--gray-primary)] hover:bg-[var(--gray-hover)] text-white shadow-md hover:shadow-lg transition-all"
 ```
 
 ---
@@ -604,9 +621,9 @@ Shows:
 
 ### Color Contrast
 - Text meets WCAG AA (4.5:1 ratio)
-- Dark sage on cream: ✅ Passes
-- White on sage green: ✅ Passes
-- Focus indicators visible
+- Dark text on white: ✅ Passes
+- White text on gray buttons: ✅ Passes
+- Focus indicators visible with ring utilities
 
 ### Touch Targets
 - Minimum 44x44px for all buttons
@@ -648,7 +665,7 @@ export function ContentPage() {
   return (
     <>
       <Navigation currentPage="content" onNavigate={...} userData={...} />
-      <div className="min-h-screen bg-[var(--cream)] lg:ml-80">
+      <div className="min-h-screen bg-white lg:ml-80">
         <div className="max-w-4xl mx-auto px-4 py-8">
           {/* Page content */}
         </div>
@@ -688,8 +705,11 @@ export function ContentPage() {
 ## Testing Guidelines
 
 ### Manual Testing Checklist
-- [ ] All buttons have clay-style (rounded, bordered, shadow)
-- [ ] Icons use consistent colors (`#3A4A46` for stats)
+- [ ] All buttons use fitness-style (gray primary, shadow-md, white text)
+- [ ] Cards use shadow-sm (no thick borders)
+- [ ] Backgrounds are white (not cream)
+- [ ] Mint green only for success states
+- [ ] Icons use consistent colors (text-primary/secondary)
 - [ ] Animations smooth and performant
 - [ ] Mobile responsive (test at 375px, 768px, 1024px)
 - [ ] Keyboard navigation works
@@ -791,9 +811,11 @@ Potential features for expansion:
 ## Support & Resources
 
 ### Documentation
-- Clay-Style-Guide.md - Design system
+- Fitness-Style-Guide.md - Current design system (v2.0)
+- Clay-Style-Guide.md - Legacy design system (v1.x)
 - Prototype-Features.md - Feature specifications
 - This file - Development guidelines
+- FITNESS_REDESIGN_CHANGELOG.md - Complete redesign documentation
 
 ### Component Library
 - Shadcn/UI: https://ui.shadcn.com/
@@ -809,7 +831,25 @@ Potential features for expansion:
 
 ## Recent Updates
 
-### Latest Changes (Current Session - Nov 1, 2025)
+### Latest Changes (Current Session - Nov 4, 2025)
+
+**🎉 COMPLETE FITNESS REDESIGN (v2.0):**
+- ✅ **All 19 components** redesigned from clay to modern fitness aesthetic
+- ✅ Changed from cream/sage/coral to white/gray/powder-blue
+- ✅ Removed thick borders (border-4) → subtle shadows (shadow-sm/md/lg)
+- ✅ Removed rounded-3xl → clean rounded-lg/xl
+- ✅ Gray buttons (#41463d) with white text instead of colorful buttons
+- ✅ Mint green ONLY for success states (not primary color)
+- ✅ All text uses CSS variables (--text-primary, --text-secondary)
+- ✅ Updated all user pages (13 components)
+- ✅ Updated all admin pages (6 components)
+- ✅ Created Fitness-Style-Guide.md documentation
+
+**See [FITNESS_REDESIGN_CHANGELOG.md](/FITNESS_REDESIGN_CHANGELOG.md) for complete redesign documentation.**
+
+---
+
+### Previous Updates (Nov 1, 2025)
 
 **Reflection System Implementation:**
 - ✅ Added 7th question type: Reflection (open-ended text responses)
@@ -825,9 +865,10 @@ Potential features for expansion:
 - ✅ Changed from full-page layout to proper sidebar-aware layout
 - ✅ Now uses `lg:ml-80` pattern (not `lg:pl-80`) to account for Navigation sidebar
 - ✅ Follows same layout pattern as Profile, BrowseLessons, and other content pages
-- ✅ Documented proper layout pattern in guidelines to prevent future issues
 
-**Previous Session Updates (Jan 16, 2025):**
+---
+
+### Older Updates (Jan 16, 2025)
 
 _Admin Panel Enhancements:_
 - ✅ Added 5 new fields to PathEditorFull (Difficulty, Time, Categories, XP, Thumbnail)
@@ -843,25 +884,35 @@ _Login Page Streamlined:_
 - ✅ Removed password strength indicator from login
 - ✅ Simpler login experience for returning users
 
-**See [CHANGELOG.md](/CHANGELOG.md) for detailed update history.**
+**See [CHANGELOG.md](/CHANGELOG.md) for complete update history.**
 
 ---
 
 ## Version History
 
-**Current Version**: 1.1 - Full Prototype with Reflection System
+**Current Version**: 2.0 - Fitness Redesign
+- **Modern fitness-inspired UI** across all 19 components
+- White backgrounds with shadow-based elevation
+- Gray primary buttons with subtle hover effects
+- Mint green reserved for success states only
 - Complete 7-question type system (including reflections)
 - Reflection system with admin feedback
 - MyReflections page for users
 - AdminReflections component for instructors
 - Gamification (lives, hints, points, badges)
 - Admin panel with full CRUD
-- Clay-style UI throughout
-- Responsive design
+- Responsive design with proper sidebar layout
 - Profile with avatar upload
 - Course browsing and filtering
 - Hierarchical learning paths
 - Results screen with bonus points
 - Leaderboard system
 
-**Last Updated**: November 1, 2025
+**Previous Version**: 1.x - Clay Design (Legacy)
+- Clay-style UI inspired by Duolingo
+- Sage green/coral/cream color palette
+- Thick borders and rounded-3xl corners
+- Playful pressed-button effects
+- See Clay-Style-Guide.md for legacy documentation
+
+**Last Updated**: November 4, 2025
